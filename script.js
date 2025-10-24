@@ -673,27 +673,91 @@ if (document.readyState === "loading") {
   initBadgesCarousel();
 }
 
-document.getElementById('contactMainForm').addEventListener('submit', function(event) {
-        const politica = document.getElementById('politica');
-        const telefono = document.getElementById('telefono');
+document
+  .getElementById("contactMainForm")
+  .addEventListener("submit", function (event) {
+    const politica = document.getElementById("politica");
+    const telefono = document.getElementById("telefono");
 
-        // Validar checkbox obligatorio
-        if (!politica.checked) {
-            alert('Debes aceptar la política de privacidad antes de enviar.');
-            event.preventDefault();
-            return;
-        }
+    // Validar checkbox obligatorio
+    if (!politica.checked) {
+      alert("Debes aceptar la política de privacidad antes de enviar.");
+      event.preventDefault();
+      return;
+    }
 
-        // Validar solo números en teléfono
-        const regex = /^[0-9]{6,15}$/; // de 6 a 15 dígitos
-        if (!regex.test(telefono.value)) {
-            alert('El campo Teléfono solo puede contener números (entre 6 y 15 dígitos).');
-            event.preventDefault();
-            return;
-        }
+    // Validar solo números en teléfono
+    const regex = /^[0-9]{6,15}$/; // de 6 a 15 dígitos
+    if (!regex.test(telefono.value)) {
+      alert(
+        "El campo Teléfono solo puede contener números (entre 6 y 15 dígitos)."
+      );
+      event.preventDefault();
+      return;
+    }
+  });
+
+// Evita que se puedan ingresar letras en tiempo real
+document.getElementById("telefono").addEventListener("input", function (e) {
+  this.value = this.value.replace(/[^0-9]/g, "");
+});
+
+// Manejo del formulario de contacto
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactMainForm");
+  const topicButtons = document.querySelectorAll(".pill-topic");
+  const topicInput = document.getElementById("tema_conversacion");
+
+  // Manejo de botones de tema
+  topicButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      topicButtons.forEach((btn) => btn.classList.remove("active"));
+      this.classList.add("active");
+      topicInput.value = this.getAttribute("data-value") || this.textContent;
     });
+  });
 
-    // Evita que se puedan ingresar letras en tiempo real
-    document.getElementById('telefono').addEventListener('input', function(e) {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
+  // Envío del formulario
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector(".submit-form-btn");
+    const originalBtnText = submitBtn.innerHTML;
+
+    // Deshabilitar botón y mostrar estado de carga
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Enviando... <span class="arrow">→</span>';
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch("procesar_contacto.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Mostrar mensaje de éxito
+        alert(data.message);
+        // Limpiar formulario
+        form.reset();
+        // Resetear tema seleccionado
+        topicButtons.forEach((btn) => btn.classList.remove("active"));
+        topicButtons[0].classList.add("active");
+        topicInput.value = topicButtons[0].getAttribute("data-value");
+      } else {
+        // Mostrar mensaje de error
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error al enviar el formulario. Inténtalo de nuevo.");
+    } finally {
+      // Restaurar botón
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+  });
+});

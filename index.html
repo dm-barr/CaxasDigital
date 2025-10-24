@@ -340,55 +340,53 @@
                         <div class="form-topics-group">
                             <label>Tema de Conversación</label>
                             <div class="topics-pills-list">
-                                <button type="button" class="pill-topic active">Lorem</button>
-                                <button type="button" class="pill-topic">Lorem</button>
-                                <button type="button" class="pill-topic">Lorem</button>
-                                <button type="button" class="pill-topic">Lorem</button>
-                                <button type="button" class="pill-topic">Otro</button>
+                                <button type="button" class="pill-topic active" data-value="Lorem">Lorem</button>
+                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
+                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
+                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
+                                <button type="button" class="pill-topic" data-value="Otro">Otro</button>
                             </div>
+                            <input type="hidden" name="tema_conversacion" id="tema_conversacion" value="Lorem" required>
                         </div>
 
                         <div class="fields-row-3">
                             <div class="field-item">
                                 <label>Nombre</label>
-                                <input type="text" placeholder="Ingresar" required>
+                                <input type="text" name="nombre" placeholder="Ingresar" required>
                             </div>
                             <div class="field-item">
                                 <label>Empresa</label>
-                                <input type="text" placeholder="Ingresar" required>
+                                <input type="text" name="empresa" placeholder="Ingresar">
                             </div>
                             <div class="field-item">
                                 <label>Ciudad / País</label>
-                                <input type="text" placeholder="Ingresar" required>
+                                <input type="text" name="ciudad_pais" placeholder="Ingresar">
                             </div>
                         </div>
 
                         <div class="fields-row-2">
                             <div class="field-item">
                                 <label>Teléfono</label>
-                                <!-- Solo números -->
-                                <input type="tel" id="telefono" placeholder="Ingresar" required pattern="[0-9]{6,15}"
-                                    inputmode="numeric" title="Ingrese solo números (mínimo 6 y máximo 15 dígitos)">
+                                <input type="tel" name="telefono" placeholder="Ingresar" pattern="[0-9]{6,15}">
                             </div>
                             <div class="field-item field-wide-2">
                                 <label>Professional email</label>
-                                <input type="email" placeholder="Ingresar" required>
+                                <input type="email" name="email" placeholder="Ingresar" required>
                             </div>
                         </div>
 
                         <div class="field-item">
                             <label>Mensaje</label>
-                            <textarea rows="4" placeholder="Ingresar tu mensaje"></textarea>
+                            <textarea name="mensaje" rows="4" placeholder="Ingresar tu mensaje" required></textarea>
                         </div>
 
-                        <!-- Checkbox obligatorio -->
                         <label class="check-label">
-                            <input type="checkbox" id="politica" required>
+                            <input type="checkbox" name="acepta_privacidad" id="politica" required>
                             <span>Acepto la política de privacidad.</span>
                         </label>
 
                         <label class="check-label">
-                            <input type="checkbox" id="info">
+                            <input type="checkbox" name="acepta_marketing" id="info">
                             <span>Acepto recibir marketing de Caxas Digital.</span>
                         </label>
 
