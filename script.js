@@ -450,7 +450,7 @@ const initScrollProgress = () => {
         top: 0;
         left: 0;
         height: 3px;
-        background: linear-gradient(90deg, #ff8c00, #ff6600);
+        background: linear-gradient(90deg, #06b6d4, #055d6dff);
         width: 0%;
         z-index: 9999;
         transition: width 0.1s ease;
