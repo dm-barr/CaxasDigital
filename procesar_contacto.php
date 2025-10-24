@@ -77,6 +77,28 @@ try {
         ':acepta_marketing' => $acepta_marketing
     ]);
     
+    // ========== ENVÍO DE EMAIL - AGREGAR AQUÍ ==========
+    $destinatario = "formularios@caxasdigital.com"; // CAMBIA POR TU EMAIL REAL
+    $asunto = "Nuevo contacto desde la web: " . $tema_conversacion;
+    
+    $cuerpo = "Has recibido un nuevo mensaje de contacto:\n\n";
+    $cuerpo .= "NOMBRE: " . $nombre . "\n";
+    $cuerpo .= "EMPRESA: " . $empresa . "\n";
+    $cuerpo .= "CIUDAD/PAÍS: " . $ciudad_pais . "\n";
+    $cuerpo .= "TELÉFONO: " . $telefono . "\n";
+    $cuerpo .= "EMAIL: " . $email . "\n";
+    $cuerpo .= "TEMA: " . $tema_conversacion . "\n\n";
+    $cuerpo .= "MENSAJE:\n" . $mensaje . "\n\n";
+    $cuerpo .= "---\n";
+    $cuerpo .= "Marketing: " . ($acepta_marketing ? 'Sí' : 'No');
+    
+    $headers = "From: " . $email . "\r\n";
+    $headers .= "Reply-To: " . $email . "\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    
+    mail($destinatario, $asunto, $cuerpo, $headers);
+    // ===================================================
+    
     echo json_encode([
         'success' => true,
         'message' => '¡Mensaje enviado exitosamente! Te contactaremos pronto.'

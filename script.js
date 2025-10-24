@@ -26,7 +26,7 @@ const initPreloader = () => {
   // Bloquear scroll
   document.body.style.overflow = "hidden";
 
-  // Añadir porcentaje
+  // AÃ±adir porcentaje
   const percentage = document.createElement("div");
   percentage.className = "preloader-percentage";
   percentage.textContent = "0%";
@@ -83,12 +83,12 @@ const initPreloader = () => {
     }
   };
 
-  // Iniciar animación
+  // Iniciar animaciÃ³n
   setTimeout(revealLetter, 400);
 };
 
 // ========================================
-// ANIMACIONES DE ENTRADA DE LA PÁGINA
+// ANIMACIONES DE ENTRADA DE LA PÃGINA
 // ========================================
 const triggerPageAnimations = () => {
   const header = document.getElementById("mainHeader");
@@ -103,7 +103,7 @@ const triggerPageAnimations = () => {
   }
 };
 
-// Añadir estas animaciones al CSS
+// AÃ±adir estas animaciones al CSS
 const style = document.createElement("style");
 style.textContent = `
     @keyframes slideDown {
@@ -230,23 +230,56 @@ const initParallax = () => {
 };
 
 // ========================================
-// VIDEO BACKGROUND OPTIMIZATION
+// VIDEO BACKGROUND OPTIMIZATION - MEJORADO PARA MÓVILES
 // ========================================
 const initVideoBackground = () => {
-  const video = document.querySelector(".hero-video");
-  if (!video) return;
+    const video = document.querySelector('.hero-video');
+    if (!video) return;
 
-  const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  if (iOS) {
-    video.remove();
-    return;
-  }
+    // Función para intentar reproducir el video
+    const playVideo = () => {
+        // Asegurar que el video tenga los atributos correctos
+        video.setAttribute('autoplay', '');
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('preload', 'auto');
+        video.muted = true; // Crucial para autoplay en móviles
+        
+        // Intentar reproducir
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log('✓ Video reproduciendo correctamente');
+                })
+                .catch(error => {
+                    console.warn('⚠ Error al reproducir video:', error);
+                    // Intentar de nuevo después de interacción del usuario
+                    const tryPlayAgain = () => {
+                        video.play()
+                            .then(() => console.log('✓ Video reproducido después de interacción'))
+                            .catch(e => console.warn('✗ Segundo intento fallido:', e));
+                    };
+                    
+                    document.body.addEventListener('click', tryPlayAgain, { once: true });
+                    document.body.addEventListener('touchstart', tryPlayAgain, { once: true });
+                });
+        }
+    };
 
-  window.addEventListener("load", () => {
-    video.play().catch(() => {});
-  });
+    // Intentar reproducir cuando el video esté listo
+    if (video.readyState >= 2) {
+        playVideo();
+    } else {
+        video.addEventListener('loadeddata', playVideo, { once: true });
+    }
 
-  setTimeout(() => video.pause(), 300000);
+    // También intentar cuando la página cargue completamente
+    if (document.readyState === 'loading') {
+        window.addEventListener('load', playVideo);
+    }
 };
 
 // ========================================
@@ -258,7 +291,7 @@ const initOfferSection = () => {
 
   if (serviceCards.length === 0 || infoCards.length === 0) return;
 
-  // Función para mostrar tarjetas según el servicio seleccionado
+  // FunciÃ³n para mostrar tarjetas segÃºn el servicio seleccionado
   const showCards = (serviceIndex) => {
     console.log("Activando servicio:", serviceIndex); // Debug
 
@@ -268,7 +301,7 @@ const initOfferSection = () => {
       card.classList.remove("card-highlight");
     });
 
-    // Activar el botón seleccionado
+    // Activar el botÃ³n seleccionado
     const selectedCard = document.querySelector(
       `.left-column .card[data-service="${serviceIndex}"]`
     );
@@ -277,7 +310,7 @@ const initOfferSection = () => {
       selectedCard.classList.add("card-highlight");
     }
 
-    // Actualizar tarjetas de información
+    // Actualizar tarjetas de informaciÃ³n
     infoCards.forEach((infoCard) => {
       const category = infoCard.getAttribute("data-category");
 
@@ -526,7 +559,7 @@ const initContactFabSystem = () => {
 
   let hasExpanded = false;
 
-  // Detectar posición y controlar visibilidad
+  // Detectar posiciÃ³n y controlar visibilidad
   const checkScrollVisibility = () => {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -536,22 +569,22 @@ const initContactFabSystem = () => {
     // Altura del hero (si existe)
     const heroHeight = hero ? hero.offsetHeight : windowHeight;
 
-    // Posición de la sección de formulario
+    // PosiciÃ³n de la secciÃ³n de formulario
     const formSectionTop = formSection.offsetTop;
     const formSectionBottom = formSectionTop + formSection.offsetHeight;
 
-    // Lógica de visibilidad
+    // LÃ³gica de visibilidad
     if (scrollPosition < heroHeight - 100) {
-      // Estamos en el Hero - ocultar botón
+      // Estamos en el Hero - ocultar botÃ³n
       fabSystem.classList.add("hide");
     } else if (
       scrollPosition + windowHeight >= formSectionTop &&
       scrollPosition < formSectionBottom
     ) {
-      // Estamos en la sección del formulario - ocultar botón
+      // Estamos en la secciÃ³n del formulario - ocultar botÃ³n
       fabSystem.classList.add("hide");
     } else {
-      // Estamos en otras secciones - mostrar botón
+      // Estamos en otras secciones - mostrar botÃ³n
       fabSystem.classList.remove("hide");
     }
 
@@ -561,7 +594,7 @@ const initContactFabSystem = () => {
     }
   };
 
-  // Expandir - MÁS RÁPIDO
+  // Expandir - MÃS RÃPIDO
   const expandContact = () => {
     if (hasExpanded) return;
     hasExpanded = true;
@@ -586,7 +619,7 @@ const initContactFabSystem = () => {
     }
   });
 
-  // Pills de tópicos
+  // Pills de tÃ³picos
   const pills = document.querySelectorAll(".pill-topic");
   pills.forEach((pill) => {
     pill.addEventListener("click", () => {
@@ -599,7 +632,7 @@ const initContactFabSystem = () => {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("¡Mensaje enviado con éxito!");
+      alert("Â¡Mensaje enviado con Ã©xito!");
       form.reset();
     });
   }
@@ -612,7 +645,7 @@ const initContactFabSystem = () => {
 };
 
 // ========================================
-// INICIALIZACIÓN
+// INICIALIZACIÃ“N
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
   //initPreloader();
@@ -625,7 +658,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollAnimations();
     initStaggerAnimations();
     initMagneticButtons();
-    initContactFabSystem(); // ← CAMBIAR AQUÍ
+    initContactFabSystem(); // â† CAMBIAR AQUÃ
     initImageReveal();
     initScrollProgress();
     initCardEffects();
@@ -681,16 +714,16 @@ document
 
     // Validar checkbox obligatorio
     if (!politica.checked) {
-      alert("Debes aceptar la política de privacidad antes de enviar.");
+      alert("Debes aceptar la polÃ­tica de privacidad antes de enviar.");
       event.preventDefault();
       return;
     }
 
-    // Validar solo números en teléfono
-    const regex = /^[0-9]{6,15}$/; // de 6 a 15 dígitos
+    // Validar solo nÃºmeros en telÃ©fono
+    const regex = /^[0-9]{6,15}$/; // de 6 a 15 dÃ­gitos
     if (!regex.test(telefono.value)) {
       alert(
-        "El campo Teléfono solo puede contener números (entre 6 y 15 dígitos)."
+        "El campo TelÃ©fono solo puede contener nÃºmeros (entre 6 y 15 dÃ­gitos)."
       );
       event.preventDefault();
       return;
@@ -717,16 +750,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Envío del formulario
+  // EnvÃ­o del formulario
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const submitBtn = form.querySelector(".submit-form-btn");
     const originalBtnText = submitBtn.innerHTML;
 
-    // Deshabilitar botón y mostrar estado de carga
+    // Deshabilitar botÃ³n y mostrar estado de carga
     submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Enviando... <span class="arrow">→</span>';
+    submitBtn.innerHTML = 'Enviando... <span class="arrow">â†’</span>';
 
     try {
       const formData = new FormData(form);
@@ -739,7 +772,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       if (data.success) {
-        // Mostrar mensaje de éxito
+        // Mostrar mensaje de Ã©xito
         alert(data.message);
         // Limpiar formulario
         form.reset();
@@ -753,9 +786,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al enviar el formulario. Inténtalo de nuevo.");
+      alert("Error al enviar el formulario. IntÃ©ntalo de nuevo.");
     } finally {
-      // Restaurar botón
+      // Restaurar botÃ³n
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
     }
