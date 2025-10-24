@@ -256,28 +256,54 @@ const initOfferSection = () => {
   const serviceCards = document.querySelectorAll(".left-column .card");
   const infoCards = document.querySelectorAll(".right-column .info-card");
 
-  const cardMapping = {
-    0: [0, 1],
-    1: [2, 3],
-    2: [2],
-    3: [3],
+  if (serviceCards.length === 0 || infoCards.length === 0) return;
+
+  // Función para mostrar tarjetas según el servicio seleccionado
+  const showCards = (serviceIndex) => {
+    console.log("Activando servicio:", serviceIndex); // Debug
+
+    // Remover clase active de todos los botones de servicio
+    serviceCards.forEach((card) => {
+      card.classList.remove("active");
+      card.classList.remove("card-highlight");
+    });
+
+    // Activar el botón seleccionado
+    const selectedCard = document.querySelector(
+      `.left-column .card[data-service="${serviceIndex}"]`
+    );
+    if (selectedCard) {
+      selectedCard.classList.add("active");
+      selectedCard.classList.add("card-highlight");
+    }
+
+    // Actualizar tarjetas de información
+    infoCards.forEach((infoCard) => {
+      const category = infoCard.getAttribute("data-category");
+
+      if (category === serviceIndex.toString()) {
+        infoCard.classList.add("active");
+      } else {
+        infoCard.classList.remove("active");
+      }
+    });
   };
 
-  serviceCards.forEach((card, index) => {
-    card.addEventListener("click", () => {
-      serviceCards.forEach((c) => c.classList.remove("active"));
-      card.classList.add("active");
-
-      infoCards.forEach((infoCard, infoIndex) => {
-        const shouldShow = cardMapping[index]?.includes(infoIndex);
-        infoCard.classList.toggle("inactive", !shouldShow);
-
-        if (shouldShow) {
-          infoCard.style.animation = "fadeInUp 0.5s ease forwards";
-        }
-      });
+  // Agregar event listeners a las tarjetas de servicio
+  serviceCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const serviceIndex = card.getAttribute("data-service");
+      showCards(serviceIndex);
     });
+
+    // Mejorar la respuesta visual
+    card.style.cursor = "pointer";
   });
+
+  // Inicializar mostrando el primer servicio
+  showCards("0");
 };
 
 // ========================================
@@ -471,13 +497,15 @@ const initScrollProgress = () => {
 // CARD HOVER EFFECTS
 // ========================================
 const initCardEffects = () => {
-  const cards = document.querySelectorAll(".card, .industry-card, .info-card");
+  // EXCLUIR las tarjetas de la columna izquierda de offer
+  const cards = document.querySelectorAll(
+    ".industry-card, .right-column .info-card.active"
+  );
 
   cards.forEach((card) => {
     card.addEventListener("mouseenter", function () {
       this.style.transform = "translateY(-8px) scale(1.02)";
     });
-
     card.addEventListener("mouseleave", function () {
       this.style.transform = "translateY(0) scale(1)";
     });
@@ -485,12 +513,109 @@ const initCardEffects = () => {
 };
 
 // ========================================
+// CONTACT FAB EXPANSION SYSTEM - FAST ANIMATION
+// ========================================
+const initContactFabSystem = () => {
+  const fabSystem = document.getElementById("contactFabSystem");
+  const fabFloating = document.getElementById("fabFloating");
+  const formSection = document.getElementById("contactFormSection");
+  const form = document.getElementById("contactMainForm");
+  const hero = document.querySelector(".hero");
+
+  if (!fabSystem || !fabFloating || !formSection) return;
+
+  let hasExpanded = false;
+
+  // Detectar posición y controlar visibilidad
+  const checkScrollVisibility = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const scrollFromBottom = pageHeight - (scrollPosition + windowHeight);
+
+    // Altura del hero (si existe)
+    const heroHeight = hero ? hero.offsetHeight : windowHeight;
+
+    // Posición de la sección de formulario
+    const formSectionTop = formSection.offsetTop;
+    const formSectionBottom = formSectionTop + formSection.offsetHeight;
+
+    // Lógica de visibilidad
+    if (scrollPosition < heroHeight - 100) {
+      // Estamos en el Hero - ocultar botón
+      fabSystem.classList.add("hide");
+    } else if (
+      scrollPosition + windowHeight >= formSectionTop &&
+      scrollPosition < formSectionBottom
+    ) {
+      // Estamos en la sección del formulario - ocultar botón
+      fabSystem.classList.add("hide");
+    } else {
+      // Estamos en otras secciones - mostrar botón
+      fabSystem.classList.remove("hide");
+    }
+
+    // Expandir formulario cuando llegamos cerca del final
+    if (scrollFromBottom < 1500 && !hasExpanded) {
+      expandContact();
+    }
+  };
+
+  // Expandir - MÁS RÁPIDO
+  const expandContact = () => {
+    if (hasExpanded) return;
+    hasExpanded = true;
+
+    fabSystem.classList.add("hide");
+    // Reducido de 300ms a 100ms
+    setTimeout(() => {
+      formSection.classList.add("show");
+    }, 10);
+  };
+
+  // Click en FAB
+  fabFloating.addEventListener("click", () => {
+    if (!hasExpanded) {
+      // Scroll suave al formulario
+      formSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      // Reducido de 600ms a 300ms
+      setTimeout(() => expandContact(), 300);
+    }
+  });
+
+  // Pills de tópicos
+  const pills = document.querySelectorAll(".pill-topic");
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      pills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+    });
+  });
+
+  // Submit
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("¡Mensaje enviado con éxito!");
+      form.reset();
+    });
+  }
+
+  // Listener de scroll
+  window.addEventListener("scroll", checkScrollVisibility);
+
+  // Check inicial
+  checkScrollVisibility();
+};
+
+// ========================================
 // INICIALIZACIÓN
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
-  initPreloader();
-
-  // Resto de inicializaciones después del preloader
+  //initPreloader();
   setTimeout(() => {
     initAnimatedHeader();
     initNavigation();
@@ -500,10 +625,11 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollAnimations();
     initStaggerAnimations();
     initMagneticButtons();
-    initContactButton();
+    initContactFabSystem(); // ← CAMBIAR AQUÍ
     initImageReveal();
     initScrollProgress();
-  }, 3500);
+    initCardEffects();
+  }, 500);
 });
 
 // ========================================
@@ -511,38 +637,63 @@ document.addEventListener("DOMContentLoaded", () => {
 // ========================================
 
 function initBadgesCarousel() {
-    const badgesCarousel = document.querySelector('.badges-carousel');
-    const partnerCarousel = document.querySelector('.partner-carousel');
-    
-    if (!badgesCarousel && !partnerCarousel) return;
-    
-    // Function to rotate slides
-    function rotateSlides(carousel, interval) {
-        const slides = carousel.querySelectorAll('.badge-slide, .partner-slide');
-        if (slides.length <= 1) return;
-        
-        let currentIndex = 0;
-        
-        setInterval(() => {
-            slides[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % slides.length;
-            slides[currentIndex].classList.add('active');
-        }, interval);
-    }
-    
-    // Initialize carousels with different intervals
-    if (badgesCarousel) {
-        rotateSlides(badgesCarousel, 4000); // Change every 4 seconds
-    }
-    
-    if (partnerCarousel) {
-        rotateSlides(partnerCarousel, 5000); // Change every 5 seconds
-    }
+  const badgesCarousel = document.querySelector(".badges-carousel");
+  const partnerCarousel = document.querySelector(".partner-carousel");
+
+  if (!badgesCarousel && !partnerCarousel) return;
+
+  // Function to rotate slides
+  function rotateSlides(carousel, interval) {
+    const slides = carousel.querySelectorAll(".badge-slide, .partner-slide");
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+      slides[currentIndex].classList.remove("active");
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add("active");
+    }, interval);
+  }
+
+  // Initialize carousels with different intervals
+  if (badgesCarousel) {
+    rotateSlides(badgesCarousel, 4000); // Change every 4 seconds
+  }
+
+  if (partnerCarousel) {
+    rotateSlides(partnerCarousel, 5000); // Change every 5 seconds
+  }
 }
 
 // Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBadgesCarousel);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initBadgesCarousel);
 } else {
-    initBadgesCarousel();
+  initBadgesCarousel();
 }
+
+document.getElementById('contactMainForm').addEventListener('submit', function(event) {
+        const politica = document.getElementById('politica');
+        const telefono = document.getElementById('telefono');
+
+        // Validar checkbox obligatorio
+        if (!politica.checked) {
+            alert('Debes aceptar la política de privacidad antes de enviar.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validar solo números en teléfono
+        const regex = /^[0-9]{6,15}$/; // de 6 a 15 dígitos
+        if (!regex.test(telefono.value)) {
+            alert('El campo Teléfono solo puede contener números (entre 6 y 15 dígitos).');
+            event.preventDefault();
+            return;
+        }
+    });
+
+    // Evita que se puedan ingresar letras en tiempo real
+    document.getElementById('telefono').addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
