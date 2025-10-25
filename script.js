@@ -26,7 +26,7 @@ const initPreloader = () => {
   // Bloquear scroll
   document.body.style.overflow = "hidden";
 
-  // AÃ±adir porcentaje
+  // AÃƒÂ±adir porcentaje
   const percentage = document.createElement("div");
   percentage.className = "preloader-percentage";
   percentage.textContent = "0%";
@@ -83,12 +83,12 @@ const initPreloader = () => {
     }
   };
 
-  // Iniciar animaciÃ³n
+  // Iniciar animaciÃƒÂ³n
   setTimeout(revealLetter, 400);
 };
 
 // ========================================
-// ANIMACIONES DE ENTRADA DE LA PÃGINA
+// ANIMACIONES DE ENTRADA DE LA PÃƒÂGINA
 // ========================================
 const triggerPageAnimations = () => {
   const header = document.getElementById("mainHeader");
@@ -103,7 +103,7 @@ const triggerPageAnimations = () => {
   }
 };
 
-// AÃ±adir estas animaciones al CSS
+// AÃƒÂ±adir estas animaciones al CSS
 const style = document.createElement("style");
 style.textContent = `
     @keyframes slideDown {
@@ -230,56 +230,61 @@ const initParallax = () => {
 };
 
 // ========================================
-// VIDEO BACKGROUND OPTIMIZATION - MEJORADO PARA MÓVILES
+// VIDEO BACKGROUND OPTIMIZATION - MEJORADO PARA MÃ“VILES
 // ========================================
 const initVideoBackground = () => {
-    const video = document.querySelector('.hero-video');
-    if (!video) return;
+  const video = document.querySelector(".hero-video");
+  if (!video) return;
 
-    // Función para intentar reproducir el video
-    const playVideo = () => {
-        // Asegurar que el video tenga los atributos correctos
-        video.setAttribute('autoplay', '');
-        video.setAttribute('muted', '');
-        video.setAttribute('playsinline', '');
-        video.setAttribute('loop', '');
-        video.setAttribute('preload', 'auto');
-        video.muted = true; // Crucial para autoplay en móviles
-        
-        // Intentar reproducir
-        const playPromise = video.play();
-        
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    console.log('✓ Video reproduciendo correctamente');
-                })
-                .catch(error => {
-                    console.warn('⚠ Error al reproducir video:', error);
-                    // Intentar de nuevo después de interacción del usuario
-                    const tryPlayAgain = () => {
-                        video.play()
-                            .then(() => console.log('✓ Video reproducido después de interacción'))
-                            .catch(e => console.warn('✗ Segundo intento fallido:', e));
-                    };
-                    
-                    document.body.addEventListener('click', tryPlayAgain, { once: true });
-                    document.body.addEventListener('touchstart', tryPlayAgain, { once: true });
-                });
-        }
-    };
+  // FunciÃ³n para intentar reproducir el video
+  const playVideo = () => {
+    // Asegurar que el video tenga los atributos correctos
+    video.setAttribute("autoplay", "");
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("loop", "");
+    video.setAttribute("preload", "auto");
+    video.muted = true; // Crucial para autoplay en mÃ³viles
 
-    // Intentar reproducir cuando el video esté listo
-    if (video.readyState >= 2) {
-        playVideo();
-    } else {
-        video.addEventListener('loadeddata', playVideo, { once: true });
+    // Intentar reproducir
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log("âœ“ Video reproduciendo correctamente");
+        })
+        .catch((error) => {
+          console.warn("âš  Error al reproducir video:", error);
+          // Intentar de nuevo despuÃ©s de interacciÃ³n del usuario
+          const tryPlayAgain = () => {
+            video
+              .play()
+              .then(() =>
+                console.log("âœ“ Video reproducido despuÃ©s de interacciÃ³n")
+              )
+              .catch((e) => console.warn("âœ— Segundo intento fallido:", e));
+          };
+
+          document.body.addEventListener("click", tryPlayAgain, { once: true });
+          document.body.addEventListener("touchstart", tryPlayAgain, {
+            once: true,
+          });
+        });
     }
+  };
 
-    // También intentar cuando la página cargue completamente
-    if (document.readyState === 'loading') {
-        window.addEventListener('load', playVideo);
-    }
+  // Intentar reproducir cuando el video estÃ© listo
+  if (video.readyState >= 2) {
+    playVideo();
+  } else {
+    video.addEventListener("loadeddata", playVideo, { once: true });
+  }
+
+  // TambiÃ©n intentar cuando la pÃ¡gina cargue completamente
+  if (document.readyState === "loading") {
+    window.addEventListener("load", playVideo);
+  }
 };
 
 // ========================================
@@ -291,7 +296,7 @@ const initOfferSection = () => {
 
   if (serviceCards.length === 0 || infoCards.length === 0) return;
 
-  // FunciÃ³n para mostrar tarjetas segÃºn el servicio seleccionado
+  // FunciÃƒÂ³n para mostrar tarjetas segÃƒÂºn el servicio seleccionado
   const showCards = (serviceIndex) => {
     console.log("Activando servicio:", serviceIndex); // Debug
 
@@ -301,7 +306,7 @@ const initOfferSection = () => {
       card.classList.remove("card-highlight");
     });
 
-    // Activar el botÃ³n seleccionado
+    // Activar el botÃƒÂ³n seleccionado
     const selectedCard = document.querySelector(
       `.left-column .card[data-service="${serviceIndex}"]`
     );
@@ -310,7 +315,7 @@ const initOfferSection = () => {
       selectedCard.classList.add("card-highlight");
     }
 
-    // Actualizar tarjetas de informaciÃ³n
+    // Actualizar tarjetas de informaciÃƒÂ³n
     infoCards.forEach((infoCard) => {
       const category = infoCard.getAttribute("data-category");
 
@@ -559,7 +564,7 @@ const initContactFabSystem = () => {
 
   let hasExpanded = false;
 
-  // Detectar posiciÃ³n y controlar visibilidad
+  // Detectar posiciÃƒÂ³n y controlar visibilidad
   const checkScrollVisibility = () => {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -569,22 +574,22 @@ const initContactFabSystem = () => {
     // Altura del hero (si existe)
     const heroHeight = hero ? hero.offsetHeight : windowHeight;
 
-    // PosiciÃ³n de la secciÃ³n de formulario
+    // PosiciÃƒÂ³n de la secciÃƒÂ³n de formulario
     const formSectionTop = formSection.offsetTop;
     const formSectionBottom = formSectionTop + formSection.offsetHeight;
 
-    // LÃ³gica de visibilidad
+    // LÃƒÂ³gica de visibilidad
     if (scrollPosition < heroHeight - 100) {
-      // Estamos en el Hero - ocultar botÃ³n
+      // Estamos en el Hero - ocultar botÃƒÂ³n
       fabSystem.classList.add("hide");
     } else if (
       scrollPosition + windowHeight >= formSectionTop &&
       scrollPosition < formSectionBottom
     ) {
-      // Estamos en la secciÃ³n del formulario - ocultar botÃ³n
+      // Estamos en la secciÃƒÂ³n del formulario - ocultar botÃƒÂ³n
       fabSystem.classList.add("hide");
     } else {
-      // Estamos en otras secciones - mostrar botÃ³n
+      // Estamos en otras secciones - mostrar botÃƒÂ³n
       fabSystem.classList.remove("hide");
     }
 
@@ -594,7 +599,7 @@ const initContactFabSystem = () => {
     }
   };
 
-  // Expandir - MÃS RÃPIDO
+  // Expandir - MÃƒÂS RÃƒÂPIDO
   const expandContact = () => {
     if (hasExpanded) return;
     hasExpanded = true;
@@ -619,7 +624,7 @@ const initContactFabSystem = () => {
     }
   });
 
-  // Pills de tÃ³picos
+  // Pills de tÃƒÂ³picos
   const pills = document.querySelectorAll(".pill-topic");
   pills.forEach((pill) => {
     pill.addEventListener("click", () => {
@@ -632,7 +637,6 @@ const initContactFabSystem = () => {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("Â¡Mensaje enviado con Ã©xito!");
       form.reset();
     });
   }
@@ -645,7 +649,7 @@ const initContactFabSystem = () => {
 };
 
 // ========================================
-// INICIALIZACIÃ“N
+// INICIALIZACIÃƒâ€œN
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
   //initPreloader();
@@ -658,7 +662,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollAnimations();
     initStaggerAnimations();
     initMagneticButtons();
-    initContactFabSystem(); // â† CAMBIAR AQUÃ
+    initContactFabSystem(); // Ã¢â€ Â CAMBIAR AQUÃƒÂ
     initImageReveal();
     initScrollProgress();
     initCardEffects();
@@ -714,16 +718,16 @@ document
 
     // Validar checkbox obligatorio
     if (!politica.checked) {
-      alert("Debes aceptar la polÃ­tica de privacidad antes de enviar.");
+      alert("Debes aceptar la polÃƒÂ­tica de privacidad antes de enviar.");
       event.preventDefault();
       return;
     }
 
-    // Validar solo nÃºmeros en telÃ©fono
-    const regex = /^[0-9]{6,15}$/; // de 6 a 15 dÃ­gitos
+    // Validar solo nÃƒÂºmeros en telÃƒÂ©fono
+    const regex = /^[0-9]{6,15}$/; // de 6 a 15 dÃƒÂ­gitos
     if (!regex.test(telefono.value)) {
       alert(
-        "El campo TelÃ©fono solo puede contener nÃºmeros (entre 6 y 15 dÃ­gitos)."
+        "El campo TelÃƒÂ©fono solo puede contener nÃƒÂºmeros (entre 6 y 15 dÃƒÂ­gitos)."
       );
       event.preventDefault();
       return;
@@ -750,20 +754,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // EnvÃ­o del formulario
+  // Envío del formulario
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
-
     const submitBtn = form.querySelector(".submit-form-btn");
     const originalBtnText = submitBtn.innerHTML;
 
-    // Deshabilitar botÃ³n y mostrar estado de carga
+    // Deshabilitar botón y mostrar estado de carga
     submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Enviando... <span class="arrow">â†’</span>';
+    submitBtn.innerHTML = 'Enviando... <span class="arrow">→</span>';
 
     try {
       const formData = new FormData(form);
-
       const response = await fetch("procesar_contacto.php", {
         method: "POST",
         body: formData,
@@ -772,23 +774,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       if (data.success) {
-        // Mostrar mensaje de Ã©xito
-        alert(data.message);
         // Limpiar formulario
         form.reset();
         // Resetear tema seleccionado
         topicButtons.forEach((btn) => btn.classList.remove("active"));
         topicButtons[0].classList.add("active");
         topicInput.value = topicButtons[0].getAttribute("data-value");
-      } else {
-        // Mostrar mensaje de error
-        alert(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al enviar el formulario. IntÃ©ntalo de nuevo.");
     } finally {
-      // Restaurar botÃ³n
+      // Restaurar botón
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
     }

@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; 
+$host = 'localhost';
 $dbname = 'a0030320_pagweb';
-$username = 'a0030320_pagweb'; 
-$password = 'VO28futaro'; 
+$username = 'a0030320_pagweb';
+$password = 'VO28futaro';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+
     $nombre = trim($_POST['nombre'] ?? '');
     $empresa = trim($_POST['empresa'] ?? '');
     $ciudad_pais = trim($_POST['ciudad_pais'] ?? '');
@@ -28,19 +28,19 @@ try {
     $mensaje = trim($_POST['mensaje'] ?? '');
     $acepta_privacidad = isset($_POST['acepta_privacidad']) ? 1 : 0;
     $acepta_marketing = isset($_POST['acepta_marketing']) ? 1 : 0;
-    
+
     if (empty($nombre) || empty($email) || empty($tema_conversacion) || empty($mensaje)) {
         throw new Exception('Por favor completa todos los campos obligatorios');
     }
-    
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Email no válido');
     }
-    
+
     if ($acepta_privacidad !== 1) {
         throw new Exception('Debes aceptar la política de privacidad');
     }
-    
+
     $sql = "INSERT INTO contactos (
         nombre, 
         empresa, 
@@ -62,9 +62,9 @@ try {
         :acepta_privacidad, 
         :acepta_marketing
     )";
-    
+
     $stmt = $conn->prepare($sql);
-    
+
     $stmt->execute([
         ':nombre' => $nombre,
         ':empresa' => $empresa,
@@ -76,11 +76,11 @@ try {
         ':acepta_privacidad' => $acepta_privacidad,
         ':acepta_marketing' => $acepta_marketing
     ]);
-    
+
     // ========== ENVÍO DE EMAIL - AGREGAR AQUÍ ==========
     $destinatario = "formularios@caxasdigital.com"; // CAMBIA POR TU EMAIL REAL
     $asunto = "Nuevo contacto desde la web: " . $tema_conversacion;
-    
+
     $cuerpo = "Has recibido un nuevo mensaje de contacto:\n\n";
     $cuerpo .= "NOMBRE: " . $nombre . "\n";
     $cuerpo .= "EMPRESA: " . $empresa . "\n";
@@ -91,19 +91,18 @@ try {
     $cuerpo .= "MENSAJE:\n" . $mensaje . "\n\n";
     $cuerpo .= "---\n";
     $cuerpo .= "Marketing: " . ($acepta_marketing ? 'Sí' : 'No');
-    
+
     $headers = "From: " . $email . "\r\n";
     $headers .= "Reply-To: " . $email . "\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    
+
     mail($destinatario, $asunto, $cuerpo, $headers);
     // ===================================================
-    
-    echo json_encode([
-        'success' => true,
-        'message' => '¡Mensaje enviado exitosamente! Te contactaremos pronto.'
-    ]);
-    
+
+    http_response_code(200);
+    exit;
+
+
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode([
@@ -111,7 +110,7 @@ try {
         'message' => 'Error en la base de datos. Inténtalo más tarde.'
     ]);
     error_log($e->getMessage());
-    
+
 } catch (Exception $e) {
     http_response_code(400);
     echo json_encode([
