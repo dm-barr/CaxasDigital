@@ -2537,3 +2537,259 @@ body {
         justify-content: center;
     }
 }
+
+/* ========================================
+   SECCIÓN NUESTRO EQUIPO
+   ======================================== */
+
+.team-section {
+    padding: 120px 40px 80px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+}
+
+.team-card {
+    position: relative;
+    background-color: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.team-card:hover {
+    border-color: #06b6d4;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.25);
+}
+
+.team-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.05);
+}
+
+.team-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.team-card:hover .team-overlay {
+    opacity: 1;
+}
+
+.team-social {
+    display: flex;
+    gap: 12px;
+}
+
+.team-social .linkedin-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.team-social .linkedin-icon:hover {
+    background-color: #06b6d4;
+    transform: translateY(-3px);
+}
+
+.team-info {
+    padding: 35px 30px;
+}
+
+.team-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.team-card:hover .team-name {
+    color: #06b6d4;
+}
+
+.team-role {
+    font-size: 14px;
+    color: #06b6d4;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-description {
+    font-size: 15px;
+    color: #aaa;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Animación de entrada */
+.team-card {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.team-card:nth-child(1) { animation-delay: 0.05s; }
+.team-card:nth-child(2) { animation-delay: 0.1s; }
+.team-card:nth-child(3) { animation-delay: 0.15s; }
+.team-card:nth-child(4) { animation-delay: 0.2s; }
+
+/* ========================================
+   RESPONSIVE - TEAM SECTION
+   ======================================== */
+
+/* Tablets grandes */
+@media (max-width: 1400px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1200px) {
+    .team-section {
+        padding: 70px 30px;
+    }
+    
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .team-image-wrapper {
+        height: 300px;
+    }
+}
+
+/* Móviles grandes */
+@media (max-width: 768px) {
+    .team-section {
+        padding: 50px 20px;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .team-card {
+        padding: 0;
+        border-radius: 14px;
+    }
+    
+    .team-image-wrapper {
+        height: 350px;
+    }
+    
+    .team-info {
+        padding: 28px 22px;
+    }
+    
+    .team-name {
+        font-size: 18px;
+    }
+    
+    .team-description {
+        font-size: 14px;
+    }
+}
+
+/* Móviles medianos */
+@media (max-width: 640px) {
+    .team-image-wrapper {
+        height: 320px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .team-section {
+        padding: 40px 15px;
+    }
+    
+    .team-image-wrapper {
+        height: 280px;
+    }
+    
+    .team-info {
+        padding: 24px 18px;
+    }
+    
+    .team-name {
+        font-size: 17px;
+    }
+    
+    .team-role {
+        font-size: 13px;
+    }
+    
+    .team-description {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    margin-top: 10px;
+    height: 70px;      /* ajusta según tu diseño */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}

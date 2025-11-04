@@ -790,3 +790,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Animación de aparición para las tarjetas de equipo
+const observerTeam = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+document.querySelectorAll('.team-card').forEach((card) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    observerTeam.observe(card);
+});

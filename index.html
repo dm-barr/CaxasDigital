@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caxas Digital</title>
+    <title>Solver - IA</title>
     <link rel="stylesheet" href="styles.css">
+    <!--Añadir favicon-->
+    <link rel="icon" type="image/png" href="img/logo/icon.png">
 </head>
 
 <body>
@@ -23,15 +25,18 @@
     <header class="header" id="mainHeader">
         <nav class="navbar">
             <div class="logo">
-                <a href="#" aria-label="Inicio Caxas Digital">Caxas Digital</a>
+                <a href="#" aria-label="Inicio Solver - IA">
+                    <img src="img/logo/letrasblancas.png" alt="Logo Solver - IA" class="logo-img">
+                </a>
             </div>
+
             <ul class="nav-menu">
-                <li><a href="#offer">Oferta</a></li>
-                <li><a href="#work">Lorem</a></li>
-                <li><a href="#case-studies">Lorem</a></li>
-                <li><a href="#blog">Lorem</a></li>
-                <li><a href="#about">Lorem</a></li>
-                <li><a href="#contact">Lorem</a></li>
+                <li><a href="#hero">Inicio</a></li>
+                <li id="btnoffer"><a href="#offer">Oferta</a></li>
+                <li><a href="#especializations">Especializaciones</a></li>
+                <li><a href="#industries">Industrias</a></li>
+                <li><a href="#team">Equipo</a></li>
+                <li><a href="#contactFormSection">Contáctanos</a></li>
             </ul>
             <div class="nav-right">
                 <a href="#" class="social-icon linkedin-icon" aria-label="Perfil de LinkedIn">
@@ -52,7 +57,7 @@
         </nav>
     </header>
 
-    <section class="hero dark-section">
+    <section class="hero dark-section" id="hero">
         <div class="hero-background">
             <video class="hero-video" autoplay muted loop playsinline poster="image.jpg">
                 <source src="video/hero.mp4" type="video/mp4">
@@ -62,13 +67,14 @@
         </div>
 
         <div class="hero-content">
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing</h1>
+            <h1>Inteligencia que fluye. Resultados que trascienden.</h1>
             <a class="cta-button" href="#offer">
                 Explora nuestros servicios
                 <span class="arrow">→</span>
             </a>
         </div>
 
+        
         <div class="footer-bar">
             <div class="recognitions">
                 <span>Nuestros reconocimientos</span>
@@ -98,18 +104,16 @@
                 <!-- Columna izquierda - Botones de servicio -->
                 <div class="left-column">
                     <div class="card card-highlight active" data-service="0">
-                        <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
-                        <p class="subtitle"> </p>
+                        <h3>Solver Flow</h3>
+                        <p class="subtitle">Automatización</p>
                     </div>
                     <div class="card" data-service="1">
-                        <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
-                        <p class="subtitle"> </p>
+                        <h3>Solver Growth</h3>
+                        <p class="subtitle">Marketing</p>
                     </div>
                     <div class="card" data-service="2">
-                        <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
-                    </div>
-                    <div class="card" data-service="3">
-                        <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3>Solver Academy</h3>
+                        <p class="subtitle">Educación</p>
                     </div>
                 </div>
 
@@ -117,11 +121,14 @@
                 <div class="right-column">
                     <!-- Tarjetas para "Outsourcing" (servicio 0) -->
                     <article class="info-card active" data-category="0">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3 class="info-title">Automatización de procesos</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro similique excepturi,
-                                minus numquam perferendis ut culpa ipsa aliquam suscipit consequatur inventore fugit
-                                reprehenderit temporibus corrupti sapiente totam? Aspernatur, laboriosam ipsa?</p>
+                            <p> Impulsa la eficiencia de tu organización con soluciones de automatización basadas en
+                                Inteligencia Artificial. Transforma tareas repetitivas en flujos de trabajo inteligentes
+                                que aprenden, se adaptan y mejoran con el tiempo. Reduce costos operativos, elimina
+                                errores humanos y libera el potencial de tu equipo para enfocarse en la innovación y la
+                                toma de decisiones estratégicas.
+                            </p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -129,11 +136,13 @@
                     </article>
 
                     <article class="info-card active" data-category="0">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3 class="info-title">Asistentes Virtuales Inteligentes</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, necessitatibus harum
-                                perferendis reprehenderit ab ipsam accusantium nostrum, aliquam laboriosam commodi sit,
-                                sequi non tempore ipsa veniam itaque quae maxime quo.</p>
+                            <p>Atiende a tus clientes las 24 horas del día con asistentes virtuales impulsados por
+                                Inteligencia Artificial. Ofrece experiencias personalizadas, respuestas inmediatas y una
+                                atención fluida en múltiples canales. Mejora la satisfacción del usuario, optimiza tus
+                                tiempos de respuesta y permite que tu equipo se enfoque en tareas estratégicas que
+                                generen verdadero valor para tu negocio.</p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -142,11 +151,13 @@
 
                     <!-- Tarjetas para "Entrega de Proyecto" (servicio 1) -->
                     <article class="info-card" data-category="1">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3 class="info-title">Marketing Digital</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, repellat deleniti
-                                aspernatur similique, vero tenetur, impedit at provident totam mollitia porro.
-                                Repudiandae animi quod cumque modi laborum praesentium illo architecto?</p>
+                            <p>Potencia tu presencia online con estrategias de marketing impulsadas por Inteligencia
+                                Artificial. Analiza datos en tiempo real, identifica patrones de comportamiento y
+                                segmenta audiencias con precisión. Optimiza tus campañas, anticipa tendencias
+                                y maximiza el retorno de inversión (ROI) con decisiones basadas en datos y
+                                automatización inteligente.</p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -154,11 +165,13 @@
                     </article>
 
                     <article class="info-card" data-category="1">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3 class="info-title">Community Management</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam obcaecati, cupiditate
-                                adipisci cum maxime fuga dolores architecto dignissimos, aperiam blanditiis tempora
-                                corrupti debitis, perferendis molestiae et quaerat dolorem. Aliquid, minus.</p>
+                            <p>Impulsa tu marca en redes sociales con una gestión profesional respaldada por análisis
+                                predictivo y herramientas basadas en Inteligencia Artificial. Construye comunidades
+                                activas y leales, mejora tu reputación digital y crea contenido relevante que conecte
+                                emocionalmente con tu audiencia. Convierte cada interacción en una oportunidad para
+                                fortalecer tu presencia online y generar crecimiento sostenible.</p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -167,11 +180,13 @@
 
                     <!-- Tarjeta para "Reclutamiento Permanente de TI" (servicio 2) -->
                     <article class="info-card" data-category="2">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        <h3 class="info-title">Cursos y Capacitaciones</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae eligendi consectetur
-                                asperiores illo. Nihil culpa harum ullam distinctio amet ut reprehenderit optio
-                                accusantium quisquam, incidunt velit consequatur qui corrupti aspernatur.</p>
+                            <p>Forma a tu equipo con programas educativos especializados en Inteligencia Artificial,
+                                automatización y transformación digital. Domina las tecnologías que están redefiniendo
+                                el futuro empresarial a través de contenidos actualizados, metodologías prácticas y
+                                casos reales. Potencia las competencias de tu organización y acelera su evolución hacia
+                                la innovación y la excelencia digital.</p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -179,12 +194,14 @@
                     </article>
 
                     <!-- Tarjeta para "Entrega de Soluciones de IA" (servicio 3) -->
-                    <article class="info-card" data-category="3">
-                        <h3 class="info-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                    <article class="info-card" data-category="2">
+                        <h3 class="info-title">Talleres Especializados</h3>
                         <div class="info-content">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nihil id praesentium
-                                ullam cupiditate dolores laboriosam eveniet labore eligendi, vero repellat natus quo
-                                expedita animi accusamus consequuntur. Eveniet, cumque possimus?</p>
+                            <p>Participa en sesiones prácticas diseñadas para implementar soluciones reales desde el
+                                primer día. Aprende a integrar Inteligencia Artificial en los procesos de tu negocio con
+                                el acompañamiento de expertos y metodologías ágiles orientadas a resultados. Transforma
+                                el conocimiento en acción y lleva la innovación de tu organización al siguiente nivel.
+                            </p>
                             <button class="read-more-btn">
                                 Leer más <span class="arrow">→</span>
                             </button>
@@ -196,38 +213,34 @@
     </section>
 
 
-    <section class="tech-section dark-section">
+    <section class="tech-section dark-section" id="especializations">
         <div class="container">
             <h2 class="section-title">Nuestras especializaciones tecnológicas</h2>
 
             <div class="tech-grid">
                 <div class="tech-image">
-                    <img src="img/prueba.jpg" alt="Teclado tecnológico">
+                    <img src="img/prueba.jpg" alt="Tecnología de Inteligencia Artificial">
                 </div>
 
                 <div class="tech-list">
-                    <a href="#ai" class="tech-item">
-                        <span class="tech-name">Inteligencia Artificial (IA)</span>
+                    <a href="#ia-ml" class="tech-item">
+                        <span class="tech-name">Inteligencia Artificial & Machine Learning</span>
                         <span class="tech-arrow">→</span>
                     </a>
-                    <a href="#software-dev" class="tech-item">
-                        <span class="tech-name">Desarrollo de software</span>
+                    <a href="#automation" class="tech-item">
+                        <span class="tech-name">Automatización Inteligente de Procesos</span>
                         <span class="tech-arrow">→</span>
                     </a>
-                    <a href="#software-integration" class="tech-item">
-                        <span class="tech-name">Integración de software</span>
+                    <a href="#chatbots" class="tech-item">
+                        <span class="tech-name">Chatbots & Asistentes Virtuales</span>
                         <span class="tech-arrow">→</span>
                     </a>
-                    <a href="#data-engineering" class="tech-item">
-                        <span class="tech-name">Ingeniería de datos</span>
+                    <a href="#data-science" class="tech-item">
+                        <span class="tech-name">Ciencia y Analítica de Datos</span>
                         <span class="tech-arrow">→</span>
                     </a>
-                    <a href="#cloud" class="tech-item">
-                        <span class="tech-name">Cloud / DevOps / Infraestructura</span>
-                        <span class="tech-arrow">→</span>
-                    </a>
-                    <a href="#cybersecurity" class="tech-item">
-                        <span class="tech-name">Ciberseguridad</span>
+                    <a href="#digital-marketing" class="tech-item">
+                        <span class="tech-name">Marketing Digital Inteligente</span>
                         <span class="tech-arrow">→</span>
                     </a>
                 </div>
@@ -304,6 +317,89 @@
         </button>
     </section>
 
+    <!-- Sección Nuestro Equipo -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+
+            <div class="team-grid">
+                <!-- Miembro 1 -->
+                <div class="team-card">
+                    <div class="team-image-wrapper">
+                        <img src=" " alt="Nombre del miembro" class="team-image">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn" class="linkedin-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Nombre Apellido</h3>
+                        <p class="team-role">Cargo</p>
+                        <p class="team-description">Descripción</p>
+                    </div>
+                </div>
+
+                <!-- Miembro 2 -->
+                <div class="team-card">
+                    <div class="team-image-wrapper">
+                        <img src=" " alt="Nombre del miembro" class="team-image">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn" class="linkedin-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Nombre Apellido</h3>
+                        <p class="team-role">Cargo</p>
+                        <p class="team-description">Descripción</p>
+                    </div>
+                </div>
+
+                <!-- Miembro 3 -->
+                <div class="team-card">
+                    <div class="team-image-wrapper">
+                        <img src="img/team-3.jpg" alt="Nombre del miembro" class="team-image">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn" class="linkedin-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Nombre Apellido</h3>
+                        <p class="team-role">Cargo</p>
+                        <p class="team-description">Descripción</p>
+                    </div>
+                </div>
+            </div>
+            <button class="contact-fab">
+                Contacto
+                <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+
     <!-- Sistema de contacto expandible -->
     <div class="contact-fab-system" id="contactFabSystem">
         <div class="fab-floating" id="fabFloating">
@@ -332,18 +428,17 @@
                 <!-- Derecha - Formulario -->
                 <div class="form-details-col">
                     <div class="form-header-text">
-                        <p class="contact-details-text">+51 999 999 999 | info@caxasdigital.com</p>
-                        <h2>Hablemos sobre cómo podemos apoyarte.</h2>
+                        <p class="contact-details-text">info@caxasdigital.com</p>
+                        <h2>Potencia tu negocio con soluciones inteligentes. ¡Hablemos hoy!</h2>
                     </div>
 
                     <form class="contact-main-form" id="contactMainForm" action="procesar_contacto.php" method="POST">
                         <div class="form-topics-group">
                             <label>Tema de Conversación</label>
                             <div class="topics-pills-list">
-                                <button type="button" class="pill-topic active" data-value="Lorem">Lorem</button>
-                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
-                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
-                                <button type="button" class="pill-topic" data-value="Lorem">Lorem</button>
+                                <button type="button" class="pill-topic active" data-value="Lorem">Solver Flow</button>
+                                <button type="button" class="pill-topic" data-value="Lorem">Solver Growth</button>
+                                <button type="button" class="pill-topic" data-value="Lorem">Solver Academy</button>
                                 <button type="button" class="pill-topic" data-value="Otro">Otro</button>
                             </div>
                             <input type="hidden" name="tema_conversacion" id="tema_conversacion" value="Lorem" required>
@@ -359,7 +454,7 @@
                                 <input type="text" name="empresa" placeholder="Ingresar">
                             </div>
                             <div class="field-item">
-                                <label>Ciudad País</label>
+                                <label>Ciudad / País</label>
                                 <input type="text" name="ciudad_pais" placeholder="Ingresar">
                             </div>
                         </div>
@@ -388,7 +483,7 @@
 
                         <label class="check-label">
                             <input type="checkbox" name="acepta_marketing" id="info">
-                            <span>Acepto recibir marketing de Caxas Digital.</span>
+                            <span>Acepto recibir marketing de Solver - IA.</span>
                         </label>
 
                         <button type="submit" class="submit-form-btn">
@@ -401,6 +496,8 @@
             </div>
         </div>
     </section>
+
+
 
     <footer class="footer">
         <div class="footer-container">
@@ -468,7 +565,7 @@
             -->
 
             <div class="footer-bottom">
-                <p>&copy; 2025 Caxas Digital. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Solver - IA. Todos los derechos reservados.</p>
                 <div class="footer-links">
                     <a href="#privacy">Política de Privacidad</a>
                     <a href="#terms">Términos de Servicio</a>
