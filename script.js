@@ -811,3 +811,17 @@ document.querySelectorAll('.team-card').forEach((card) => {
     card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
     observerTeam.observe(card);
 });
+
+document.querySelectorAll('.read-more-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const description = button.previousElementSibling;
+
+            description.classList.toggle('expanded');
+
+            if (description.classList.contains('expanded')) {
+                button.textContent = 'Mostrar menos';
+            } else {
+                button.textContent = 'Saber más...';
+            }
+        });
+    });
