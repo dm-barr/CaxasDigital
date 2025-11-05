@@ -2969,3 +2969,20 @@ body {
         margin: 5px 0 0 0;
     }
 }
+
+/* MÓVIL: Ocultar tarjetas inactivas en la columna derecha */
+@media (max-width: 768px) {
+  .right-column .info-card {
+    display: none;
+  }
+  
+  .right-column .info-card.active {
+    display: flex;
+  }
+  
+  /* Ajustar grid para mostrar solo las activas */
+  .right-column {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
