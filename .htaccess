@@ -1,0 +1,14 @@
+# Forzar a que el servidor sirva XML como texto legible
+AddType application/xml .xml
+AddType text/xml .xml
+
+# Asegurar acceso a sitemap
+<Files "sitemap.xml">
+  Require all granted
+</Files>
+
+# Evitar que el servidor interprete XML como PHP u otro script
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+</IfModule>
